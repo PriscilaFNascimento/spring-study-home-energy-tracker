@@ -1,8 +1,11 @@
 package com.priscilafn.het_user_service.dto;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
-public record UserResponseDTO(UUID id,
+@Builder
+public record UserResponseDTO(long id,
                               String name,
                               String surname,
                               String email,
