@@ -7,6 +7,9 @@ import com.priscilafn.het_user_service.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
+import java.util.UUID;
+
 @Slf4j
 @Service
 public class UserService {
@@ -31,6 +34,33 @@ public class UserService {
         userRepository.save(entity);
 
         return toResponseDTO(entity);
+    }
+
+    public UserResponseDTO getUserById(UUID id) {
+        return userRepository.findById(id)
+                .map(this::toResponseDTO)
+                .orElse(null);
+    }
+
+    public void updateUser(UUID id, UserRequestDTO userRequestDTO) {
+        final User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+
+        user.setName(userRequestDTO.name());
+        user.setSurname(userRequestDTO.surname());
+        user.setEmail(userRequestDTO.email());
+        user.setAddress(userRequestDTO.address());
+        user.setHasAlertEnabled(userRequestDTO.hasAlertEnabled());
+        user.setEnergyAlertingThreshold(userRequestDTO.energyAlertingThreshold());
+
+        userRepository.save(user);
+    }
+
+    public void deleteUser(UUID id) {
+        final User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+
+        userRepository.delete(user);
     }
 
     private UserResponseDTO toResponseDTO(User user) {
