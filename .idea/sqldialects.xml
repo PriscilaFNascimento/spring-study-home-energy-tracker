@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/het-user-service/src/main/resources/db/migration/V1__create_user_table.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/het-user-service/src/main/resources/db/migration/V2__rename_table_and_columns.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/het-user-service/src/main/resources/db/migration/V3__rename_application_user_table.sql" dialect="GenericSQL" />
   </component>
 </project>
