@@ -2,6 +2,8 @@ package com.priscilafn.het_user_service.service;
 
 import com.priscilafn.het_user_service.dto.UserRequestDTO;
 import com.priscilafn.het_user_service.dto.UserResponseDTO;
+import com.priscilafn.het_user_service.entity.User;
+import com.priscilafn.het_user_service.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +11,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
-        // Implement the logic to create a user and return the response DTO
-        return null;
+
+        final User entity = User.builder()
+                .name(userRequestDTO.name())
+                .surname(userRequestDTO.surname())
+                .email(userRequestDTO.email())
+                .address(userRequestDTO.address())
+                .hasAlertEnabled(userRequestDTO.hasAlertEnabled())
+                .energyAlertingThreshold(userRequestDTO.energyAlertingThreshold())
+                .build();
+
+        userRepository.save(entity);
+
+        return toResponseDTO(entity);
+    }
+
+    private UserResponseDTO toResponseDTO(User user) {
+        return new UserResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getEmail(),
+                user.getAddress(),
+                user.isHasAlertEnabled(),
+                user.getEnergyAlertingThreshold()
+        );
     }
 }
