@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/het-device-service.iml" filepath="$PROJECT_DIR$/het-device-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-study-home-energy-tracker.iml" filepath="$PROJECT_DIR$/.idea/spring-study-home-energy-tracker.iml" />
     </modules>
   </component>
