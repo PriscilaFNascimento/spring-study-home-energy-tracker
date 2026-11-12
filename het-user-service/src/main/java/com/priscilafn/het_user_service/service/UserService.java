@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.security.InvalidParameterException;
 import java.util.UUID;
 
-@Slf4j
 @Service
 public class UserService {
 
