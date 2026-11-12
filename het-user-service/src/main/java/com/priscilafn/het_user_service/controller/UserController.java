@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserResponseDTO> getUser(@PathVariable UUID id){
-        UserResponseDTO userResponseDTO = userService.getUserById(id);
+    public ResponseEntity<Optional<UserResponseDTO>> getUser(@PathVariable UUID id){
+        Optional<UserResponseDTO> userResponseDTO = userService.getUserById(id);
         return ResponseEntity.ok(userResponseDTO);
     }
 

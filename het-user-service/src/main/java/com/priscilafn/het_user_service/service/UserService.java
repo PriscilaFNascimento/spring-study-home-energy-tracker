@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,10 +36,9 @@ public class UserService {
         return toResponseDTO(entity);
     }
 
-    public UserResponseDTO getUserById(UUID id) {
+    public Optional<UserResponseDTO> getUserById(UUID id) {
         return userRepository.findById(id)
-                .map(this::toResponseDTO)
-                .orElse(null);
+                .map(this::toResponseDTO);
     }
 
     public void updateUser(UUID id, UserRequestDTO userRequestDTO) {
