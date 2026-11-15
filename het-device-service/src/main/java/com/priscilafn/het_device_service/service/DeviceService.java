@@ -3,6 +3,7 @@ package com.priscilafn.het_device_service.service;
 import com.priscilafn.het_device_service.dto.DeviceRequestDTO;
 import com.priscilafn.het_device_service.dto.DeviceResponseDTO;
 import com.priscilafn.het_device_service.entity.Device;
+import com.priscilafn.het_device_service.exception.DeviceNotFoundException;
 import com.priscilafn.het_device_service.repository.DeviceRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class DeviceService {
 
     public void updateDevice(UUID id, DeviceRequestDTO deviceRequestDTO) {
         final Device device = deviceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Device not found!"));
+                .orElseThrow(() -> new DeviceNotFoundException("Device not found!"));
 
         device.setName(deviceRequestDTO.name());
         device.setLocation(deviceRequestDTO.location());
@@ -50,7 +51,7 @@ public class DeviceService {
 
     public void deleteDevice(UUID id) {
         final Device device = deviceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Device not found!"));
+                .orElseThrow(() -> new DeviceNotFoundException("Device not found!"));
 
         deviceRepository.delete(device);
     }

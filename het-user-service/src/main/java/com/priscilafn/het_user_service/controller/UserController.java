@@ -34,21 +34,13 @@ public class UserController {
 
     @PutMapping("{id}")
     public ResponseEntity<String> updateUser(@PathVariable UUID id, @RequestBody UserRequestDTO userRequestDTO){
-        try {
-            userService.updateUser(id, userRequestDTO);
-            return ResponseEntity.ok("User updated successfully!");
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
-        }
+        userService.updateUser(id, userRequestDTO);
+        return ResponseEntity.ok("User updated successfully!");
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUser(@PathVariable UUID id){
-        try{
-            userService.deleteUser(id);
-            return ResponseEntity.ok("User deleted successfully!");
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>("User not found!", HttpStatus.NOT_FOUND);
-        }
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully!");
     }
 }

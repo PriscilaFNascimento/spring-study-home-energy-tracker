@@ -37,21 +37,13 @@ public class DeviceController {
 
     @PutMapping("{id}")
     public ResponseEntity<String> updateDevice(@PathVariable UUID id, @RequestBody DeviceRequestDTO deviceRequestDTO){
-        try {
-            deviceService.updateDevice(id, deviceRequestDTO);
-            return ResponseEntity.ok("Device updated successfully!");
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>("Device not found!", HttpStatus.NOT_FOUND);
-        }
+        deviceService.updateDevice(id, deviceRequestDTO);
+        return ResponseEntity.ok("Device updated successfully!");
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteDevice(@PathVariable UUID id){
-        try{
-            deviceService.deleteDevice(id);
-            return ResponseEntity.ok("Device deleted successfully!");
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>("Device not found!", HttpStatus.NOT_FOUND);
-        }
+        deviceService.deleteDevice(id);
+        return ResponseEntity.ok("Device deleted successfully!");
     }
 }

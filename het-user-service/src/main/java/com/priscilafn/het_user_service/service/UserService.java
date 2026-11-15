@@ -3,6 +3,7 @@ package com.priscilafn.het_user_service.service;
 import com.priscilafn.het_user_service.dto.UserRequestDTO;
 import com.priscilafn.het_user_service.dto.UserResponseDTO;
 import com.priscilafn.het_user_service.entity.User;
+import com.priscilafn.het_user_service.exception.UserNotFoundException;
 import com.priscilafn.het_user_service.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class UserService {
 
     public void updateUser(UUID id, UserRequestDTO userRequestDTO) {
         final User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
         user.setName(userRequestDTO.name());
         user.setSurname(userRequestDTO.surname());
@@ -57,7 +58,7 @@ public class UserService {
 
     public void deleteUser(UUID id) {
         final User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User not found!"));
 
         userRepository.delete(user);
     }
