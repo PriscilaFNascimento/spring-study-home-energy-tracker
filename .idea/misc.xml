@@ -5,7 +5,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/het-user-service/pom.xml" />
-        <option value="$PROJECT_DIR$/het-device-service/het-device-service/pom.xml" />
         <option value="$PROJECT_DIR$/het-device-service/pom.xml" />
       </list>
     </option>
